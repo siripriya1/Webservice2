@@ -26,7 +26,7 @@ Parameters:
   TargetGroup:
     Description: The ECS cluster
     Type: String
-    Default: arn:aws:elasticloadbalancing:us-east-1:579510459337:targetgroup/webservice2-dev-TG/eb0f4c74fb8f3baf
+    Default: arn:aws:elasticloadbalancing:us-east-1:579510459337:targetgroup/Webservice2-dev-TG/b692bcd756892ac9
 
   ContainerName:
     Type: String
