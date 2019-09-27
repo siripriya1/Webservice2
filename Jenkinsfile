@@ -100,8 +100,8 @@ pipeline {
 						ContainerName=$IMAGE_NAME \
 						ServiceName=$IMAGE_NAME \
 						ContainerTag=dev$BUILD_NUMBER \
-                    --stack-name "webservice2" \
-                    --region us-east-1
+                        --stack-name "webservice2" \
+                        --region us-east-1
 					'''
 				}
         	}
