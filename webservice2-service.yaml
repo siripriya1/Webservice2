@@ -70,7 +70,7 @@ Resources:
         Name: !Ref ContainerName
         PortMappings:
         #server
-        - ContainerPort: 8001
+        - ContainerPort: 8002
           HostPort: 0
         LogConfiguration:
           LogDriver: awslogs
@@ -81,24 +81,3 @@ Resources:
         Environment:
         - Name: ENVIRONMENT
           Value: !Ref Environment     
-
-  webservice2Service:
-    Type: AWS::ECS::Service
-    DependsOn:
-    - webservice2Task
-    Properties:
-      ServiceName: !Ref ServiceName
-      Cluster: !Ref ServicesCluster
-      DesiredCount: !Ref DesiredTasks
-      LoadBalancers:
-      - ContainerName: !Ref ContainerName
-        ContainerPort: '8001'
-        TargetGroupArn: !Ref TargetGroup       
-      Role: !Ref ECSServiceRole
-      TaskDefinition: !Ref webservice2Task
-      PlacementStrategies:
-      - Field: attribute:ecs.availability-zone
-        Type: spread
-      - Field: instanceId
-        Type: spread
-      HealthCheckGracePeriodSeconds: 600
