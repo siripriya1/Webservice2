@@ -31,7 +31,7 @@ public class Webservice2Controller {
     public ResponseEntity<String> healthCheck()
     {
     	logger.info("Researchrecord service is healthy");
-		return ResponseEntity.status(HttpStatus.OK).body("Webservice 1 researchRecordsService is healthy.");
+		return ResponseEntity.status(HttpStatus.OK).body("Webservice2 researchRecordsService is healthy.");
     }
     
    
