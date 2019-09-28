@@ -26,7 +26,7 @@ Parameters:
   TargetGroup:
     Description: The ECS cluster
     Type: String
-    Default: arn:aws:elasticloadbalancing:us-east-1:579510459337:targetgroup/Webservice2-dev-TG/3ede21adea36a7cd
+    Default: arn:aws:elasticloadbalancing:us-east-1:579510459337:targetgroup/Webservice2-dev-TG/b692bcd756892ac9
 
   ContainerName:
     Type: String
@@ -81,3 +81,24 @@ Resources:
         Environment:
         - Name: ENVIRONMENT
           Value: !Ref Environment     
+
+  webservice2Service:
+    Type: AWS::ECS::Service
+    DependsOn:
+    - webservice2Task
+    Properties:
+      ServiceName: !Ref ServiceName
+      Cluster: !Ref ServicesCluster
+      DesiredCount: !Ref DesiredTasks
+      LoadBalancers:
+      - ContainerName: !Ref ContainerName
+        ContainerPort: '8002'
+        TargetGroupArn: !Ref TargetGroup       
+      Role: !Ref ECSServiceRole
+      TaskDefinition: !Ref webservice2Task
+      PlacementStrategies:
+      - Field: attribute:ecs.availability-zone
+        Type: spread
+      - Field: instanceId
+        Type: spread
+      HealthCheckGracePeriodSeconds: 600
